@@ -8,43 +8,73 @@ public class MyMain {
     // scan.nextDouble() might be useful here
     public static double inputDouble() {
         Scanner scan = new Scanner(System.in);
-        // REPLACE THIS WITH YOUR CODE
-
-        return -1.0;
+        double moneys = 0;
+        while (true) {
+            System.out.println("Give me a number between 1 and a million.");
+            moneys = scan.nextDouble();
+            if (moneys >=1&&moneys<=1000000){
+                break;
+            }
+        }
+        return moneys;
     }
 
     // Takes a double money as input and returns the number of quarters that we
     // can return in change
     // You should use a while loop!
-    public static int numQuarters(double money) {
-        // REPLACE THIS WITH YOUR CODE
-        return 0;
+    public static int numQuarters(double moneys) {
+        return (int)((moneys*4)-(moneys*4)%0.25);
     }
 
     // Takes a double money as input and returns the number of dimes that we
     // can return in change
     // You should use a while loop!
-    public static int numDimes(double money) {
+    public static int numDimes(double moneys) {
         // REPLACE THIS WITH YOUR CODE
-        return 0;
+        double count = moneys;
+        int dimecount = 0;
+        while (count>=0.1){
+            count-=0.1;
+            dimecount++;
+        }
+        return dimecount;
+    }
+    public static int numNickels(double moneys) {
+        // REPLACE THIS WITH YOUR CODE
+        double count = moneys;
+        int nickelcount = 0;
+        while (count>=0.05){
+            count-=0.05;
+            nickelcount++;
+        }
+        return nickelcount;
+    }
+    public static int numPennies(double moneys) {
+        // REPLACE THIS WITH YOUR CODE
+        double count = moneys;
+        int pennycount = 0;
+        while (count>=0.01){
+            count-=0.01;
+            pennycount++;
+        }
+        return pennycount;
     }
 
-
-
-
-
-    //  Takes in two Strings as input and returns a String equal to those two Strings added
-    //  together in alphabetic order.
-    public static String stringOrder(String str1, String str2) {
-        return "";
+    public static String coinCount(double moneys){
+        double quarter = numQuarters(moneys);
+        double dimes = numDimes(moneys-(quarter/4));
+        double nickels = numNickels(moneys-(quarter/4)-(dimes/10));
+        double pennies = numPennies(moneys-(quarter/4)-(dimes/10)-(nickels*20));
+        return moneys+" in quarters, dimes, nickels and pennies needed are "+(int)quarter+", "+(int)dimes+", "+(int)nickels+", and "+(int)pennies+".";
     }
+
 
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-
         // You should test inputDouble yourself!
-        double d = inputDouble();
+        double inp = inputDouble();
+        System.out.println(coinCount(inp));
 
         // Some code to test numQuarters
         System.out.println("\nnumQuarters tests:");
